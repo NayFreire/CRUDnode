@@ -1,0 +1,33 @@
+<h1>Clientes Cadastrados</h1>
+<hr>
+<a href="addColab">Cadastrar</a>
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Nome</td>
+        <td>Cidade</td>
+        <td>Bairro</td>
+        <td>E-mail</td>
+        <td>Telefone</td>
+        <td>Ações</td>
+    </tr>
+
+    {{#data}}
+        <tr>
+            <td>{{idColab}}</td>
+            <td>{{nome}}</td>
+            <td>{{cidade}}</td>
+            <td>{{bairro}}</td>
+            <td>{{email}}</td>
+            <td>{{telefone}}</td>
+            <td>
+                <a href="updateColab/{{idColab}}" title="Editar">
+                    <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
+                </a>
+                <a href="deleteColab/{{idColab}}" title="Deletar">
+                    <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
+                </a>
+            </td>
+        </tr>
+    {{/data}}
+</table>

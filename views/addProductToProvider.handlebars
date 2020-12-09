@@ -1,0 +1,21 @@
+<h1>Relacionando Produtos à Fornecedores</h1>
+<hr>
+<h2>Nesta seção, vamos ligar o (a) fornecedor(a) {{#nomeP}}{{nome}}{{/nomeP}} à determinado produto, assumindo que o mesmo fornece tal protudo</h2>
+
+<table>
+    <tr>
+        <td>Nome</td>
+        <td>Associar</td>
+    </tr>
+
+    {{#data}}
+        <tr>
+            <td>{{nome}}</td>
+            <td>
+                <a href="/confirmAssociation/{{idProduto}}" title="Ligar esse produto ao fornecesor">
+                    <img class="imgIcon" src="/img/addAssociation.png" alt="Associar">
+                </a>
+            </td>
+        </tr>
+    {{/data}}
+</table>

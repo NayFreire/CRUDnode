@@ -1,0 +1,18 @@
+<h1>Cadastre de Funcionários</h1>
+<hr>
+<div class="divAdd">
+    <form action="/controllerEmp" method="post" name="form1">
+        <label for="username">Nome de Usuário</label><br>
+        <input type="text" class="inputAdd" name="username" id="username" required><br><br>
+        <label for="passw">Senha</label><br>
+        <input type="password" class="inputAdd" name="passw" id="passw"required><br><br>
+        <div class="typeColab">
+            <label for="type" class="inputAdd">Tipo de Usuários</label><br><br>
+            <select name="employeeType" id="employeeType" class="inputAdd" required><br><br>
+                <option value="admin">Admin</option>
+                <option value="comun">Comun</option>
+            </select>
+        </div>
+        <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar">
+    </form>
+</div>
