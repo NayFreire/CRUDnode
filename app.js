@@ -37,7 +37,7 @@ app.post('/controllerEmp', urlencodeParser, function(req, res){
 
 //---------------------------------------- Routes Provider ----------------------------------------
 var colabIdForProvider;
-var cpfProvider;
+
 app.get('/addProvider', function(req, res){
     res.render('addProvider')
 })
@@ -61,30 +61,37 @@ app.get('/listProviders/:id?', function(req, res){
         })
     }
 })
+app.get('/addProductToProvider/:id', function(req, res){
+    res.render('addProductToProvider')
+})
+
+//---------------------------------------- Routes Client ----------------------------------------
+var colabIdForClient;
+
+app.get('/addClient', function(req, res){
+    res.render('addClient')
+})
+app.post('/controllerAddCliente', urlencodeParser, function(req, res){
+    sql.query('INSERT INTO colabs (nome, cidade, bairro, email, telefone) VALUES (?, ?, ?, ?, ?)', [req.body.name, req.body.city, req.body.neighborhood, req.body.email, req.body.phone])
+    sql.query('SELECT idColab FROM colabs WHERE nome=? AND email=? ORDER BY idColab ASC', [req.body.name, req.body.email], function(err, results, fields){
+        console.log(results)
+        colabIdForClient = results[0].idColab;
+        sql.query('INSERT INTO cliente VALUES (?, ?)', [colabIdForClient, req.body.cnpj])
+    })
+    res.render('controllerAddClient', {name: req.body.name})
+})
 // app.get('/listProviders/:id?', function(req, res){
 //     if(!req.params.id){
-//         sql.query('SELECT * FROM colabs WHERE tipo like "fornecedor" ORDER BY idColab ASC', function(err, results, fields){
+//         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId ORDER BY idColab ASC', function(err, results, fields){
 //             res.render('listProviders', {data: results})
 //         })
 //     }
 //     else{
-//         sql.query('SELECT * FROM colabs WHERE idColab=? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
+//         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId AND idColab = ? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
 //             res.render('listProviders', {data: results})
 //         })
 //     }
 // })
-app.get('/listClients/:id?', function(req, res){
-    if(!req.params.id){
-        sql.query('SELECT * FROM colabs WHERE tipo like "cliente" ORDER BY idColab ASC', function(err, results, fields){
-            res.render('listClients', {data: results})
-        })
-    }
-    else{
-        sql.query('SELECT * FROM colabs WHERE idColab=? AND tipo like "cliente" ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
-            res.render('listClients', {data: results})
-        })
-    }
-})
 app.get('/deleteColab/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     res.render('controllerDeleteColabs')
