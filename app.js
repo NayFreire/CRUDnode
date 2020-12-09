@@ -37,29 +37,30 @@ app.post('/controllerEmp', urlencodeParser, function(req, res){
 
 //---------------------------------------- Routes Provider ----------------------------------------
 var colabIdForProvider;
+var cpfProvider;
 app.get('/addProvider', function(req, res){
     res.render('addProvider')
 })
 app.post('/controllerAdd', urlencodeParser, function(req, res){
     sql.query('INSERT INTO colabs (nome, cidade, bairro, email, telefone) VALUES (?, ?, ?, ?, ?)', [req.body.name, req.body.city, req.body.neighborhood, req.body.email, req.body.phone])
     sql.query('SELECT idColab FROM colabs WHERE nome=? AND email=? ORDER BY idColab ASC', [req.body.name, req.body.email], function(err, results, fields){
-        colabIdForProvider = results.idColab;
-        console.log(colabIdForProvider)
+        colabIdForProvider = results[0].idColab;
+        sql.query('INSERT INTO fornecedor VALUES (?, ?)', [colabIdForProvider, req.body.cpf])
     })
     res.render('controllerAdd', {name: req.body.name})
 })
-app.get('/listProviders/:id?', function(req, res){
-    if(!req.params.id){
-        sql.query('SELECT * FROM colabs WHERE tipo like "fornecedor" ORDER BY idColab ASC', function(err, results, fields){
-            res.render('listProviders', {data: results})
-        })
-    }
-    else{
-        sql.query('SELECT * FROM colabs WHERE idColab=? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
-            res.render('listProviders', {data: results})
-        })
-    }
-})
+// app.get('/listProviders/:id?', function(req, res){
+//     if(!req.params.id){
+//         sql.query('SELECT * FROM colabs WHERE tipo like "fornecedor" ORDER BY idColab ASC', function(err, results, fields){
+//             res.render('listProviders', {data: results})
+//         })
+//     }
+//     else{
+//         sql.query('SELECT * FROM colabs WHERE idColab=? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
+//             res.render('listProviders', {data: results})
+//         })
+//     }
+// })
 app.get('/listClients/:id?', function(req, res){
     if(!req.params.id){
         sql.query('SELECT * FROM colabs WHERE tipo like "cliente" ORDER BY idColab ASC', function(err, results, fields){
