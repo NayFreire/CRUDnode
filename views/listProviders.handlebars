@@ -13,15 +13,15 @@
         <td>Ações</td>
     </tr>
 
-    {{#dados}}
+    {{#data}}
         <tr>
-            <td>{{id}}</td>
-            <td>{{dataC.nome}}</td>
-            <td>{{dataC.cidade}}</td>
-            <td>{{dataC.bairro}}</td>
-            <td>{{dataC.email}}</td>
-            <td>{{dataC.telefone}}</td>  
-            <td>{{data.cpf}}</td>
+            <td>{{idColab}}</td>
+            <td>{{nome}}</td>
+            <td>{{cidade}}</td>
+            <td>{{bairro}}</td>
+            <td>{{email}}</td>
+            <td>{{telefone}}</td>
+            <td>{{cpf}}</td>
             <td>
                 <a href="updateColab/{{idColab}}" title="Editar">
                     <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
@@ -34,5 +34,5 @@
                 </a>
             </td>
         </tr>
-    {{/dados}}
+    {{/data}}
 </table>

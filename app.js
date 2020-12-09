@@ -51,31 +51,12 @@ app.post('/controllerAdd', urlencodeParser, function(req, res){
 })
 app.get('/listProviders/:id?', function(req, res){
     if(!req.params.id){
-        sql.query('SELECT * FROM colabs ORDER BY idColab ASC', function(err, results1, fields){
-            sql.query('SELECT cpf FROM fornecedor ORDER BY colabFornecedorId ASC', function(err, results2, fields){
-                for(i=0;i<results1.length;i++){
-                    results = {
-                        id: results1[i].idColab,
-                        nome: results1[i].nome,
-                        cidade: results1[i].cidade,
-                        bairro: results1[i].bairro,
-                        email: results1[i].email,
-                        telefone: results1[i].telefone,
-                        cpf: results2[i].cpf
-                    }
-                }
-
-                //var results = {dataC: results1, data: results2}
-                console.log('-----Results----- \n', results)
-                console.log('tamanho: ',results1.length)
-                res.render('listProviders', {dados: results})
-                // console.log('results1: ', results1)
-                // console.log('results2: ', results2) 
-            })
+        sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId ORDER BY idColab ASC', function(err, results, fields){
+            res.render('listProviders', {data: results})
         })
     }
     else{
-        sql.query('SELECT * FROM colabs WHERE idColab=? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
+        sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId AND idColab = ? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
             res.render('listProviders', {data: results})
         })
     }
