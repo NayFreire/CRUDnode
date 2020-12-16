@@ -21,8 +21,21 @@ app.engine('handlebars', handlebars({defaultLayout: 'main'}))
 app.set('view engine', 'handlebars')
 
 //Loading index
+var username, passw;
 app.get('/', function(req, res){
     res.render('index')
+})
+app.post('/menu', urlencodeParser, function(req, res){ 
+    sql.query('SELECT username, senha FROM funcionarios WHERE username = ? AND senha = ?', [req.body.nomeFunc, req.body.senhaFunc], function(err, results, fields){
+        console.log(results)
+        console.log('results.lentgh: ', results.length)
+        if(results.length>0){
+            res.render('menu')
+        }
+        else{
+            res.send('O nome de usuário e/ou a senha estão incorretos')
+        }
+    })
 })
 
 //--------------------------------------- Routes Employee ----------------------------------------

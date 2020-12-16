@@ -49,3 +49,7 @@ table tr:first-child{
 .imgIcon{
     height: 50%;
 }
+
+#btnLogin{
+    text-align: center;
+}
