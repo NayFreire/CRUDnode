@@ -37,6 +37,8 @@ app.post('/controllerEmp', urlencodeParser, function(req, res){
 
 //---------------------------------------- Routes Provider ----------------------------------------
 var colabIdForProvider;
+var provId;
+var provNome;
 
 app.get('/addProvider', function(req, res){
     res.render('addProvider')
@@ -62,7 +64,14 @@ app.get('/listProviders/:id?', function(req, res){
     }
 })
 app.get('/addProductToProvider/:id', function(req, res){
-    res.render('addProductToProvider')
+    provId = req.params.id;
+    sql.query('SELECT * FROM produto', function(err, result, fields){
+        sql.query('SELECT idColab, nome FROM colabs WHERE idColab = ?', [req.params.id], function(err, results, fiels){
+            provNome = results[0].nome;
+            res.render('addProductToProvider', {data: result, idP: results[0].idColab, nome: results[0].nome})
+        })
+    })
+    console.log(provId)
 })
 
 //---------------------------------------- Routes Client ----------------------------------------
@@ -80,18 +89,18 @@ app.post('/controllerAddCliente', urlencodeParser, function(req, res){
     })
     res.render('controllerAddClient', {name: req.body.name})
 })
-// app.get('/listProviders/:id?', function(req, res){
-//     if(!req.params.id){
-//         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId ORDER BY idColab ASC', function(err, results, fields){
-//             res.render('listProviders', {data: results})
-//         })
-//     }
-//     else{
-//         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId AND idColab = ? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
-//             res.render('listProviders', {data: results})
-//         })
-//     }
-// })
+app.get('/listClients/:id?', function(req, res){
+    if(!req.params.id){
+        sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cnpj FROM colabs JOIN cliente WHERE idColab = colabClienteId ORDER BY idColab ASC', function(err, results, fields){
+            res.render('listClients', {data: results})
+        })
+    }
+    else{
+        sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cnpj FROM colabs JOIN cliente WHERE idColab = colabClienteId AND idColab = ? ORDER BY idColab ASC', [req.params.id], function(err, results, fields){
+            res.render('listClients', {data: results})
+        })
+    }
+})
 app.get('/deleteColab/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     res.render('controllerDeleteColabs')
@@ -120,26 +129,27 @@ app.get('/listProducts/:id?', function(req, res){
     }
 })
 
-//---------------------------------- Routes Colab-Product Relation ----------------------------------
-var providerId;
+//-------------------------------- Routes Provider-Product Relation --------------------------------
+var providerId = provId;
 var nomeProvider;
-app.get('/addProductToProvider/:id', function(req, res){
-    sql.query('SELECT nome FROM colabs WHERE idColab = ?', [req.params.id], function(err, results, fields){
-        nomeProvider = results;
-    })
-    sql.query('SELECT * FROM produto', function(err, results, fields){
-        res.render('addProductToProvider', {data: results, idProvider: req.params.id, nomeP: nomeProvider})
-        providerId = req.params.id;
-    })
-})
-app.get('/confirmAssociation/:id', function(req, res){
-    // res.send("idProvider: " + providerId + "\nidProduto: " + req.params.id)
-    sql.query('SELECT * FROM colaborador_tem_produto', function(err, results, fields){
-        if(results.colabId==providerId && results.produtoId==req.params.id){
-            
+app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){
+
+    sql.query('INSERT INTO fornecedor_tem_produto VALUES (?,?)', [provId, req.params.id], function(err, results, fields){
+        if(err.errno==1062){ //Se o erro que retornar tem número 1062, então esses items já foram cadastrados juntos
+            res.send('Esse produto já foi associado à esse fornecedor')
         }
+        else{            
+            res.render('confirmAssociation')
+        }
+        
     })
-    sql.query('INSERT INTO colaborador_tem_produto VALUES (?,?)', [providerId, req.params.id])
+
+    // sql.query('INSERT INTO fornecedor_tem_produto VALUES (?,?)', [provId, req.params.id])
+    // res.render('confirmAssociation')
+    
+    // sql.query('SELECT * FROM fornecedor_tem_produto', function(err, results, fields){
+    //     console.log(results)
+    // })
 
 })
 
