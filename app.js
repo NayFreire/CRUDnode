@@ -143,14 +143,6 @@ app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){
         }
         
     })
-
-    // sql.query('INSERT INTO fornecedor_tem_produto VALUES (?,?)', [provId, req.params.id])
-    // res.render('confirmAssociation')
-    
-    // sql.query('SELECT * FROM fornecedor_tem_produto', function(err, results, fields){
-    //     console.log(results)
-    // })
-
 })
 
 //Start Server
