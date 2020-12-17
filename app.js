@@ -153,8 +153,7 @@ app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){
         }
         else{            
             res.render('confirmAssociation')
-        }
-        
+        }        
     })
 })
 
