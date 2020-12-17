@@ -15,6 +15,7 @@ sql.query('use morangando')
 
 app.use('/css', express.static('css'))
 app.use('/img', express.static('img'))
+app.use('/js', express.static('js'))
 
 //Template engine
 app.engine('handlebars', handlebars({defaultLayout: 'main'}))
@@ -125,7 +126,7 @@ app.get('/addProduct', function(req, res){
 })
 
 app.post('/controllerAddProduct', urlencodeParser, function(req, res){
-    sql.query('INSERT INTO produto (nome) VALUES (?)', [req.body.nameProduto])
+    sql.query('INSERT INTO produto (nome, tipo) VALUES (?,?)', [req.body.nameProduto, req.body.typeProduto])
     res.render('controllerAddProduct')
 })
 
