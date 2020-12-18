@@ -138,8 +138,8 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
         }
     }
     else if(req.body.option == 'nao'){
-        sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, 0])
-        console.log('cadastrou')
+        var none = 0;
+        sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
         res.render('controllerAddProduct')
     }
 })
