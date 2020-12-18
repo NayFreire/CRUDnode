@@ -28,8 +28,6 @@ app.get('/', function(req, res){
 })
 app.post('/menu', urlencodeParser, function(req, res){ 
     sql.query('SELECT username, senha FROM funcionarios WHERE username = ? AND senha = ?', [req.body.nomeFunc, req.body.senhaFunc], function(err, results, fields){
-        console.log(results)
-        console.log('results.lentgh: ', results.length)
         if(results.length>0){
             res.render('menu')
         }
@@ -126,22 +124,29 @@ app.get('/addProduct', function(req, res){
 })
 
 app.post('/controllerAddProduct', urlencodeParser, function(req, res){
-    console.log('nome: ', req.body.nameProduto, '\ntipo: ', req.body.typeProduto, '\noption: ', req.body.option,'\nqtd: ', req.body.qtdProduto)
-    console.log('---------------------------')
-    if(req.body.option == 'sim'){
-        if(req.body.qtdProduto == 0){
-            res.send('Você não indicou uma quantidade do produtos válida')
+    sql.query('SELECT * FROM produto WHERE nome = ? AND tipo = ?', [req.body.nameProduto, req.body.typeProduto], function(err, results, fields){
+        console.log(results)
+        if(results.length>0){
+            res.send('Este produto já foi cadastrado')
         }
         else{
-            sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, req.body.qtdProduto])
-            res.render('controllerAddProduct')            
+            if(req.body.option == 'sim'){
+                if(req.body.qtdProduto == 0){
+                    res.send('Você não indicou uma quantidade do produtos válida')
+                }
+                else{
+                    sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, req.body.qtdProduto])
+                    res.render('controllerAddProduct')            
+                }
+            }
+            else if(req.body.option == 'nao'){
+                var none = 0;
+                sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
+                res.render('controllerAddProduct')
+            }
         }
-    }
-    else if(req.body.option == 'nao'){
-        var none = 0;
-        sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
-        res.render('controllerAddProduct')
-    }
+    })
+    
 })
 
 app.get('/listProducts/:id?', function(req, res){
