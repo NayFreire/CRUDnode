@@ -145,8 +145,7 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
                 res.render('controllerAddProduct')
             }
         }
-    })
-    
+    })    
 })
 
 app.get('/listProducts/:id?', function(req, res){
