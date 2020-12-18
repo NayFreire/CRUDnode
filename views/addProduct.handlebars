@@ -12,10 +12,10 @@
         <label for="sim">Sim</label><br>
         <input type="radio" id="nao" name="option" value="não" checked>
         <label for="nao">Não</label><br>
-
-        <div id="divQtd" style="display: none;">
+        <br>
+        <div id="divQtd" >
             <label for="qtdProduto">Quantidade do produto</label><br>
-            <input type="number" class="inputAdd" name="qtdProduto" id="qtdProduto" required><br><br>
+            <input type="number" class="inputAdd" name="qtdProduto" id="qtdProduto" min="0" value="0"><br><br>
         </div>
 
         <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar">

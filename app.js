@@ -126,8 +126,22 @@ app.get('/addProduct', function(req, res){
 })
 
 app.post('/controllerAddProduct', urlencodeParser, function(req, res){
-    sql.query('INSERT INTO produto (nome, tipo) VALUES (?,?)', [req.body.nameProduto, req.body.typeProduto])
-    res.render('controllerAddProduct')
+    console.log('nome: ', req.body.nameProduto, '\ntipo: ', req.body.typeProduto, '\noption: ', req.body.option,'\nqtd: ', req.body.qtdProduto)
+    console.log('---------------------------')
+    if(req.body.option == 'sim'){
+        if(req.body.qtdProduto == 0){
+            res.send('Você não indicou uma quantidade do produtos válida')
+        }
+        else{
+            sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, req.body.qtdProduto])
+            res.render('controllerAddProduct')            
+        }
+    }
+    else if(req.body.option == 'nao'){
+        sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, 0])
+        console.log('cadastrou')
+        res.render('controllerAddProduct')
+    }
 })
 
 app.get('/listProducts/:id?', function(req, res){
