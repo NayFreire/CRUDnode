@@ -1,3 +1,12 @@
+body{
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 h1{
     text-align: center;
 }
@@ -28,6 +37,33 @@ a{
     font-size: 1.4rem;
 }
 
+.inputLoginBtn{
+    padding: 10px 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.inputLoginBtn:hover{
+    background-color: #41e441;
+    color: #fff;
+    transition: ease-in-out .5s;
+}
+
+.addBtnLogin{
+    text-align: center;
+}
+
+.addBtnLogin a{
+    color: #000;
+}
+
+.addBtnLogin:hover{
+    font-weight: 700;
+}
+
 label{
     font-size: 1.2rem;
 }
@@ -50,6 +86,35 @@ table tr:first-child{
     height: 50%;
 }
 
-#btnLogin{
+#divBtnLogin{
     text-align: center;
+    padding: 25px 10px;
+}
+
+.divLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login{
+    min-width: 300px !important;
+    padding: 40px 25px;
+    background-color: #FF805D;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 10px;
+}
+
+.imgLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loginInput{
+    padding: 5px;
+    width: 95%;
+    height: 30px;
+    border-radius: 5px;
+    border: none;
 }

@@ -1,17 +1,22 @@
-<h1>Faça o Login</h1>
-
-<div class="divAdd">
-    <form action="/menu" method="post" name="form1">
-    <label for="nomeFunc">Nome do usuários</label><br>
-    <input type="text" name="nomeFunc" id="nomeFunc" class="inputAdd"><br>
-    <label for="senhaFunc">Senha</label><br>
-    <input type="password" name="senhaFunc" id="senhaFunc" class="inputAdd"><br><br>
-    <div id="btnLogin">
-        <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Entrar">
+<div class="divLogin">
+    <div class="login">
+        <h2 style="margin: 0 0 10px 0; text-align: center">Faça seu login aqui</h2>
+        <div class="imgLogin">
+            <img src="/img/userIcon.png" alt="">
+        </div>
+        <br>
+        <form action="/menu" method="post" name="form1">
+        <label for="nomeFunc">Nome do usuários</label><br>
+        <input type="text" name="nomeFunc" id="nomeFunc" class="inputAdd loginInput"><br><br>
+        <label for="senhaFunc">Senha</label><br>
+        <input type="password" name="senhaFunc" id="senhaFunc" class="inputAdd loginInput"><br><br>
+        <div id="divBtnLogin">
+            <input type="submit" class="inputLoginBtn" name="btnSubmit" value="Entrar">
+        </div>
+        
+        <div class="addBtnLogin">
+            <a href="addEmployee">Cadastrar de funcionários</a>
+        </div>
     </div>
 </form>
-</div>
-
-<div class="divAdd">
-    <a href="addEmployee">Cadastro de funcionários</a>
 </div>
