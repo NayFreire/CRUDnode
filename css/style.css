@@ -6,10 +6,12 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    font-family: 'Roboto', sans-serif;
 }
 
 h1{
     text-align: center;
+    margin: 0;
 }
 
 a{
@@ -18,7 +20,7 @@ a{
 }
 
 .divAdd{
-    margin-top: 50px;
+    /* margin-top: 30px; */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +42,7 @@ a{
 
 .inputLoginBtn{
     padding: 10px 20px;
-    background-color: #fff;
+    background-color: #41e441;
     border-radius: 5px;
     border: none;
     font-size: 1.4rem;
@@ -48,7 +50,7 @@ a{
 }
 
 .inputLoginBtn:hover{
-    background-color: #41e441;
+    background-color: #08cc08;
     color: #fff;
     transition: ease-in-out .5s;
 }
@@ -100,7 +102,7 @@ table tr:first-child{
 
 .login{
     min-width: 300px !important;
-    padding: 40px 25px;
+    padding: 30px 20px;
     background-color: #FF805D;
     font-family: 'Roboto', sans-serif;
     border-radius: 10px;
@@ -138,3 +140,29 @@ a .btnMenu{
     transition: ease-in-out .5s;
 }
 
+.divInputForm{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.divInputForm #employeeType{
+    margin-left: 10px;
+}
+
+.formGroup label{
+    margin-left: 2px;
+}
+
+select{
+    height: 30px;
+    font-size: 1rem;
+    border: none;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+#divBtnAddEmp{
+    text-align: center;
+    margin-top: 20px;
+}
