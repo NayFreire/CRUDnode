@@ -1,38 +1,45 @@
-<h1>Fornecedores Cadastrados</h1>
-<hr>
-<a href="addProvider">Cadastrar</a>
-<table>
-    <tr>
-        <td>ID</td>
-        <td>Nome</td>
-        <td>Cidade</td>
-        <td>Bairro</td>
-        <td>E-mail</td>
-        <td>Telefone</td>
-        <td>CPF</td>
-        <td>Ações</td>
-    </tr>
+<div class="needMoreSpace">
+    <div style="padding: 10px 30px;">
+        <h1>Fornecedores Cadastrados</h1>        
+        <div class="divLogin">
+            <a href="addProvider">
+                <div class="btnAddLists">Cadastrar Fornecedor(a)</div>
+            </a>
+        </div>
+        <table>
+            <tr>
+                <td>ID</td>
+                <td>Nome</td>
+                <td>Cidade</td>
+                <td>Bairro</td>
+                <td>E-mail</td>
+                <td>Telefone</td>
+                <td>CPF</td>
+                <td>Ações</td>
+            </tr>
 
-    {{#data}}
-        <tr>
-            <td>{{idColab}}</td>
-            <td>{{nome}}</td>
-            <td>{{cidade}}</td>
-            <td>{{bairro}}</td>
-            <td>{{email}}</td>
-            <td>{{telefone}}</td>
-            <td>{{cpf}}</td>
-            <td>
-                <a href="updateColab/{{idColab}}" title="Editar">
-                    <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
-                </a>
-                <a href="deleteColab/{{idColab}}" title="Deletar">
-                    <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
-                </a>
-                <a href="addProductToProvider/{{idColab}}" title="Associar à produtos">
-                    <img class="imgIcon" src="/img/addProduct.png" alt="Adicionar Produtos">
-                </a>
-            </td>
-        </tr>
-    {{/data}}
-</table>
+            {{#data}}
+                <tr>
+                    <td>{{idColab}}</td>
+                    <td>{{nome}}</td>
+                    <td>{{cidade}}</td>
+                    <td>{{bairro}}</td>
+                    <td>{{email}}</td>
+                    <td>{{telefone}}</td>
+                    <td>{{cpf}}</td>
+                    <td>
+                        <a href="updateColab/{{idColab}}" title="Editar">
+                            <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
+                        </a>
+                        <a href="deleteColab/{{idColab}}" title="Deletar">
+                            <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
+                        </a>
+                        <a href="addProductToProvider/{{idColab}}" title="Associar à produtos">
+                            <img class="imgIcon" src="/img/addProduct.png" alt="Adicionar Produtos">
+                        </a>
+                    </td>
+                </tr>
+            {{/data}}
+        </table>
+    </div>
+</div>

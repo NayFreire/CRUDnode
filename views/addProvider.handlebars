@@ -1,14 +1,40 @@
-<h1>Cadastre-se agora mesmo</h1>
-<hr>
-<div class="divAdd">
-    <form action="/controllerAdd" method="post" name="form1">
-        <input type="text" class="inputAdd" name="name" id="name" placeholder="Insira seu nome completo" required><br><br>
-        <input type="text" class="inputAdd" name="city" id="city" placeholder="Insira a sua cidade" required><br><br>
-        <input type="text" class="inputAdd" name="neighborhood" id="neighborhood" placeholder="Insira seu bairro" required><br><br>
-        <input type="email" class="inputAdd" name="email" id="email" placeholder="Insira seu email"><br><br>
-        <input type="tel" class="inputAdd" name="phone" id="phone" placeholder="Insira seu telefone" required><br><br>
-        <input type="text" class="inputAdd" name="cpf" id="cpf" placeholder="Insira seu CPF"
-        required>
-        <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar">
-    </form>
+<div>
+    <div class="login">
+    <h1 style="margin-bottom: 20px;">Cadastro de Fornecedor</h1>
+        <form action="/controllerAdd" method="post" name="form1">
+            <div class="formGroup">
+                <label for="name">Nome completo</label>
+                <div class="divInputForm">
+                    <input type="text" class="loginInput" name="name" id="name" required>
+                </div>
+            </div>
+            <br>
+            <div class="formGroup">
+                <label for="email">E-mail</label>
+                <div class="divInputForm">
+                    <input type="email" class="loginInput" name="email" id="email">
+                </div>
+            </div>
+            <br>
+            <div class="formGroup">
+                <label for="phone">Telefone</label>
+                <div class="divInputForm">
+                    <input type="tel" class="loginInput" name="phone" id="phone" required>
+                </div>
+            </div>
+            <br>
+            <div class="formGroup">
+                <lable for='cpf'>CPF</lable>
+                <div class="divInputForm">
+                    <input type="text" class="loginInput" name="cpf" id="cpf" required>
+                </div>
+            </div>
+            
+            {{!-- <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar"> --}}
+
+            <div id="divBtnAddEmp">
+                <input type="submit" class="inputLoginBtn" name="btnSubmit" value="Cadastrar">
+            </div>
+        </form>
+    </div>
 </div>
