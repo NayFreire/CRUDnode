@@ -2,6 +2,7 @@ body{
     padding: 0;
     margin: 0;
     height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,3 +119,22 @@ table tr:first-child{
     border-radius: 5px;
     border: none;
 }
+
+.btnMenu{
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    background-color: #E83A30;
+    text-align: center;
+    border-radius: 5px;
+}
+
+a .btnMenu{
+    color: #fff;
+}
+
+.btnMenu:hover, a .btnMenu:hover{
+    color: #000;
+    background-color: #FDBB96;
+    transition: ease-in-out .5s;
+}
+
