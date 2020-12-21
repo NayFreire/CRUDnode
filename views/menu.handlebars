@@ -1,5 +1,5 @@
-<div>
-    <h1 style="font-family: 'Roboto', sans-serif; margin: 0 10px 20px 0"> Menu Principal Morangando</h1>
+<div class="container-fluid">
+    {{!-- <h1 style="font-family: 'Roboto', sans-serif; margin: 0 10px 20px 0"> Menu Principal Morangando</h1>
 
     <div class="divOptionIndex divAdd">
         <div>
@@ -30,6 +30,55 @@
             <a href="listProducts">
                 <div class="btnMenu">Listar Produtos</div>
             </a>
+        </div>
+    </div> --}}
+    <h1>Menu principal</h1>
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="col-md-3 h-100">
+
+            <a href="addEmployee">
+                <div class="btnMenuFunc">Cadastrar Funcionários</div>
+            </a>
+            <br>
+            <a href="#">    
+                <div class="btnMenuFunc">Listar Funcionários</div>
+            </a>  
+        </div>
+        <div class="col-md-3 h-100">
+            <div>
+                {{!-- <h1 style="font-family: 'Roboto', sans-serif; margin: 0 10px 20px 0"> Menu Principal Morangando</h1> --}}
+                
+                
+                <a href="addClient">
+                    <div class="btnMenuCli">Cadastrar Cliente</div>
+                </a>
+                <br>
+                <a href="listClients">    
+                    <div class="btnMenuCli">Listar Clientes</div>
+                </a>                 
+            </div>
+        </div>
+        <div class="col-md-3 h-100">
+            <div>
+                <a href="addProvider">
+                    <div class="btnMenuFor">Cadastrar Fornecedor</div>
+                </a>
+                <br>
+                <a href="listProviders">
+                    <div class="btnMenuFor">Listar Fornecedores</div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 h-100">
+            <div>
+                <a href="addProduct">
+                    <div class="btnMenuPro">Cadastrar Produto</div>
+                </a>  
+                <br>
+                <a href="listProducts">
+                    <div class="btnMenuPro">Listar Produtos</div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

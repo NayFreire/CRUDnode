@@ -130,21 +130,83 @@ table tr:first-child{
     border: none;
 }
 
-.btnMenu{
+a {
+    text-decoration: none !important;
+}
+
+.btnMenuFunc{
     font-family: 'Roboto', sans-serif;
     padding: 10px 20px;
-    background-color: #E83A30;
+    background-color: #f77a32;
     text-align: center;
     border-radius: 5px;
 }
 
-a .btnMenu{
+a .btnMenuFunc{
     color: #fff;
 }
 
-.btnMenu:hover, a .btnMenu:hover{
+.btnMenuFunc:hover, a .btnMenuFunc:hover{
     color: #000;
-    background-color: #FDBB96;
+    background-color: #E83A30;
+    transition: ease-in-out .5s;
+}
+
+.btnMenuCli{
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    background-color: #4499df;
+    text-align: center;
+    border-radius: 5px;
+}
+
+a .btnMenuCli{
+    color: #fff;
+}
+
+.btnMenuCli:hover, a .btnMenuCli:hover{
+    color: #000;
+    background-color: #0780e2;
+    transition: ease-in-out .5s;
+}
+
+.btnMenuFor{
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    background-color: rgb(80, 218, 80);
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+a .btnMenuFor{
+    color: #fff;
+    text-decoration: none !important;
+}
+
+.btnMenuFor:hover, a .btnMenuFor:hover{
+    color: #000;
+    background-color: #00be00;
+    transition: ease-in-out .5s;
+    text-decoration: none;
+}
+
+.btnMenuPro{
+    font-family: 'Roboto', sans-serif;
+    padding: 10px 20px;
+    background-color: #c752fd;
+    text-align: center;
+    border-radius: 5px;
+}
+
+a .btnMenuPro{
+    color: #fff;
+    text-decoration: none;
+}
+
+.btnMenuPro:hover, a .btnMenuPro:hover{
+    color: #000;
+    background-color: #ae00ff;
     transition: ease-in-out .5s;
 }
 
@@ -152,10 +214,6 @@ a .btnMenu{
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.divInputForm #employeeType{
-    margin-left: 10px;
 }
 
 .formGroup label{
