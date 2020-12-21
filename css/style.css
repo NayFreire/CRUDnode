@@ -108,6 +108,14 @@ table tr:first-child{
     border-radius: 10px;
 }
 
+.addForm{
+    max-width: 800px !important;
+    padding: 30px 20px;
+    background-color: #FF805D;
+    font-family: 'Roboto', sans-serif;
+    border-radius: 10px;
+}
+
 .imgLogin{
     display: flex;
     align-items: center;

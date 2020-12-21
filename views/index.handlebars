@@ -1,6 +1,9 @@
-<div class="divLogin">
-    <div class="login">
-        <h1 style="margin: 0 0 10px 0; text-align: center">Faça seu login aqui</h1>
+<div class="container">
+    <div class="row">
+        <span class="col-lg-3"></span>
+        <div class="col-lg-6">
+            {{!-- <div class="login"> --}}
+        {{!-- <h1 style="margin: 0 0 10px 0; text-align: center">Faça seu login aqui</h1>
         <div class="imgLogin">
             <img src="/img/userIcon.png" alt="">
         </div>
@@ -16,7 +19,27 @@
         
         <div class="addBtnLogin">
             <a href="addEmployee">Cadastrar de funcionários</a>
+        </div> --}}
+    {{!-- </div> --}}
+    <form class="form-signin" action="/menu" method="post" name="form1">
+        <div class="d-flex align-items-center justify-content-center w-100">
+            <img class="mb-4" src="/img/userIcon.png" alt="" width="72" height="72">
         </div>
+
+        <h1 class="h3 mb-3 font-weight-normal">Faça login aqui</h1>
+        
+        {{!-- <label for="inputEmail" class="sr-only">Nome de usuário</label> --}}
+        <input type="text" id="inputEmail" class="form-control" name="nomeFunc" placeholder="Nome de usuário">
+        {{!-- <label for="inputPassword" class="sr-only">Senha</label> --}}
+        <input type="password" id="inputPassword" class="form-control" name="senhaFunc" placeholder="Senha">
+        <div class="d-flex align-items-center justify-content-center w-100 mt-3">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+        </div>
+        {{!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button> --}}
+    </form>
+        </div>
+        <span class="col-lg-3"></span>
     </div>
-</form>
 </div>
+
+

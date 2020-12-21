@@ -85,6 +85,11 @@ app.get('/addProductToProvider/:id', function(req, res){
     })
     console.log(provId)
 })
+app.post('/updateProvider/:id', urlencodeParser, function(req, res){
+    sql.query('SELECT nome, cidade, bairro, email, cpf telefone FROM colabs JOIN fornecedor WHERE idColab = ?', [req.body.id], function(err, results, fields){
+        res.render('updateProvider', {data: results})        
+    })
+})
 
 //---------------------------------------- Routes Client ----------------------------------------
 var colabIdForClient;

@@ -1,0 +1,42 @@
+<div>
+    <div class="login">
+    <h1 style="margin-bottom: 20px;">Atualização de Fornecedor</h1>
+        <form action="/controllerAdd" method="post" name="form1">
+            {{#data}}
+                <div class="formGroup">
+                <label for="name">Nome completo</label>
+                <div class="divInputForm">
+                    <input type="text" class="loginInput" name="name" id="name" value="{{nome}}" required>
+                </div>
+                </div>
+                <br>
+                <div class="formGroup">
+                    <label for="email">E-mail</label>
+                    <div class="divInputForm">
+                        <input type="email" class="loginInput" name="email" id="email" value="{{email}}">
+                    </div>
+                </div>
+                <br>
+                <div class="formGroup">
+                    <label for="phone">Telefone</label>
+                    <div class="divInputForm">
+                        <input type="tel" class="loginInput" name="phone" id="phone" required value="{{telefone}}">
+                    </div>
+                </div>
+                <br>
+                <div class="formGroup">
+                    <lable for='cpf'>CPF</lable>
+                    <div class="divInputForm">
+                        <input type="text" class="loginInput" name="cpf" id="cpf" required>
+                    </div>
+                </div>
+            
+            {{/data}}
+            {{!-- <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar"> --}}
+
+            <div id="divBtnAddEmp">
+                <input type="submit" class="inputLoginBtn" name="btnSubmit" value="Cadastrar">
+            </div>
+        </form>
+    </div>
+</div>
