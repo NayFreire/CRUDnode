@@ -102,6 +102,12 @@ app.post('/controllerUpdateProvider/:id', urlencodeParser, function(req, res){
     })
 })
 
+app.get('/deleteProvider/:id', function(req, res){
+    sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
+    sql.query('DELETE FROM fornecedor WHERE colabFornecedorId = ?', [req.params.id])
+    res.render('deleteProvider')
+})
+
 //---------------------------------------- Routes Client ----------------------------------------
 var colabIdForClient;
 
@@ -132,10 +138,7 @@ app.get('/listClients/:id?', function(req, res){
 app.get('/controllerDeleteColabs/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     sql.query('DELETE FROM cliente WHERE colabClienteId = ?', [req.params.id])
-    res.render('controllerDeleteColabs')
-   
-    
-    
+    res.render('controllerDeleteColabs')   
 })
 
 //----------------------------------------- Routes Product -----------------------------------------
