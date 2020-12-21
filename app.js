@@ -129,9 +129,13 @@ app.get('/listClients/:id?', function(req, res){
         })
     }
 })
-app.get('/deleteColab/:id', function(req, res){
+app.get('/controllerDeleteColabs/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
+    sql.query('DELETE FROM cliente WHERE colabClienteId = ?', [req.params.id])
     res.render('controllerDeleteColabs')
+   
+    
+    
 })
 
 //----------------------------------------- Routes Product -----------------------------------------
