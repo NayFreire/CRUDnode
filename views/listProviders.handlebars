@@ -1,4 +1,4 @@
-<div class="needMoreSpace">
+{{!-- <div class="needMoreSpace">
     <div style="padding: 10px 30px;">
         <h1>Fornecedores Cadastrados</h1>        
         <div class="divLogin">
@@ -41,5 +41,55 @@
                 </tr>
             {{/data}}
         </table>
+    </div>
+</div> --}}
+<div class="container-fluid h-100">
+    <div class="row">
+        <span class="col-lg-1"></span>
+        <div class="col-lg-10">
+            <h1>Fornecedores Cadastrados</h1>
+            {{!-- <a href="addClient">Cadastrar</a> --}}
+            <div class="d-flex justify-content-center" style="margin-bottom: 10px;">                
+                <a href="addProvider">
+                    <div class="btnAddLists">Cadastrar Fornecedor(a)</div>
+                </a>
+            </div>
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Cidade</td>
+                    <td>Bairro</td>
+                    <td>E-mail</td>
+                    <td>Telefone</td>
+                    <td>CPF</td>
+                    <td>Ações</td>
+                </tr>
+
+                {{#data}}
+                    <tr>
+                        <td>{{idColab}}</td>
+                        <td>{{nome}}</td>
+                        <td>{{cidade}}</td>
+                        <td>{{bairro}}</td>
+                        <td>{{email}}</td>
+                        <td>{{telefone}}</td>
+                        <td>{{cpf}}</td>
+                        <td>
+                            <a href="updateProvider/{{idColab}}" title="Editar">
+                                <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
+                            </a>
+                            <a href="deleteColab/{{idColab}}" title="Deletar">
+                                <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
+                            </a>
+                            <a href="addProductToProvider/{{idColab}}" title="Associar à produtos">
+                                <img class="imgIcon" src="/img/addProduct.png" alt="Adicionar Produtos">
+                            </a>
+                        </td>
+                    </tr>
+                {{/data}}
+            </table>
+                    </div>
+        <span class="col-lg-1"></span>
     </div>
 </div>
