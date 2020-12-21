@@ -3,57 +3,27 @@
     <div class="row">
         <span class="col-md-4"></span>
         <div class="col-md-4">
-            {{!-- <form action="/controllerEmp" method="post" name="form1">
-            <div class="formGroup">
-                <label for="username">Nome de Usuário</label><br>
-                <div class="divInputForm">
-                    <input type="text" class="loginInput" name="username" required>
+            <form action="/controllerEmp" method="post" name="form1">
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="username">Nome de Usuário</label>
+                    <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" required>
                 </div>
-            </div>
-            <br>
-            <div class="formGroup">
-                <label for="passw">Senha</label><br>
-                <div class="divInputForm">
-                    <input type="password" class="loginInput" name="passw" id="passw" required>
+                <div class="form-group" style="margin-bottom: 10px;">
+                    <label for="passw">Senha</label>
+                    <input type="password" class="form-control" id="passw" name="passw" required>
                 </div>
-            </div>
-            <br>
-            <div class="formgroup">
-                <div style="margin-left: 3px;">
+                <div class="form-group" style="margin-bottom: 10px;">
                     <label for="type" class="">Tipo de Usuários</label><br>
-                <select name="employeeType" id="employeeType" required><br><br>
-                    <option value="admin">01 - Administrador</option>
-                    <option value="comun">02 - Comum</option>
-                </select>
+                    <select name="employeeType" id="employeeType" class="custom-select" required><br><br>
+                        <option selected value="">Selecione o tipo</option>
+                        <option value="admin">01 - Administrador</option>
+                        <option value="comun">02 - Comum</option>
+                    </select>
                 </div>
-            </div>
-            <input type="submit" class="inputAdd" name="btnSubmit" id="btnSubmit" value="Cadastrar">
-            <div id="divBtnAddEmp">
-                <input type="submit" class="inputLoginBtn" name="btnSubmit" value="Cadastrar">
-            </div>
-        </form> --}}
-
-        <form action="/controllerEmp" method="post" name="form1">
-            <div class="form-group" style="margin-bottom: 10px;">
-                <label for="username">Nome de Usuário</label>
-                <input type="text" class="form-control" id="username" aria-describedby="emailHelp" name="username" required>
-            </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <label for="passw">Senha</label>
-                <input type="password" class="form-control" id="passw" name="passw" required>
-            </div>
-            <div class="form-group" style="margin-bottom: 10px;">
-                <label for="type" class="">Tipo de Usuários</label><br>
-                <select name="employeeType" id="employeeType" class="custom-select" required><br><br>
-                    <option selected value="">Selecione o tipo</option>
-                    <option value="admin">01 - Administrador</option>
-                    <option value="comun">02 - Comum</option>
-                </select>
-            </div>
-            <div class="d-flex align-items-center justify-content-center">
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </div>
-        </form>
+                <div class="d-flex align-items-center justify-content-center">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
         </div>
         <span class="col-md-4"></span>
     </div>
