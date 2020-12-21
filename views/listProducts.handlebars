@@ -1,29 +1,41 @@
-<h1>Produtos Cadastrados</h1>
-<hr>
-<a href="addProduct">Cadastrar Produto</a>
-<table>
-    <tr>
-        <td>ID</td>
-        <td>Nome</td>
-        <td>Tipo</td>
-        <td>Em Estoque</td>
-        <td>Ações</td>
-    </tr>
+<div class="container-fluid h-100">
+    <div class="row">
+        <span class="col-lg-1"></span>
+        <div class="col-lg-10">
+            <h1>Produtos Cadastrados</h1>
+            {{!-- <a href="addClient">Cadastrar</a> --}}
+            <div class="d-flex justify-content-center" style="margin-bottom: 10px;">                
+                <a href="addProduct">
+                    <div class="btnAddLists">Cadastrar Produto</div>
+                </a>
+            </div>
+            <table>
+                <tr>
+                    <td>ID</td>
+                    <td>Nome</td>
+                    <td>Tipo</td>
+                    <td>Em Estoque</td>
+                    <td>Ações</td>
+                </tr>
 
-    {{#data}}
-        <tr>
-            <td>{{idProduto}}</td>
-            <td>{{nome}}</td>
-            <td>{{tipo}}</td>
-            <td>{{qtdEstoque}}</td>
-            <td>
-                <a href="update/{{idProduto}}" title="Editar">
-                    <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
-                </a>
-                <a href="deletar/{{idProduto}}" title="Deletar">
-                    <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
-                </a>
-            </td>
-        </tr>
-    {{/data}}
-</table>
+                {{#data}}
+                    <tr>
+                        <td>{{idProduto}}</td>
+                        <td>{{nome}}</td>
+                        <td>{{tipo}}</td>
+                        <td>{{qtdEstoque}}</td>
+                        <td>
+                            <a href="update/{{idProduto}}" title="Editar">
+                                <img class="imgIcon" src="/img/editIcon.png" alt="Editar">
+                            </a>
+                            <a href="deletar/{{idProduto}}" title="Deletar">
+                                <img class="imgIcon deletar" src="/img/deleteIcon.png" alt="Deletar">
+                            </a>
+                        </td>
+                    </tr>
+                {{/data}}
+            </table>
+                    </div>
+        <span class="col-lg-1"></span>
+    </div>
+</div>
