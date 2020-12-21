@@ -85,9 +85,20 @@ app.get('/addProductToProvider/:id', function(req, res){
     })
     console.log(provId)
 })
-app.post('/updateProvider/:id', urlencodeParser, function(req, res){
-    sql.query('SELECT nome, cidade, bairro, email, cpf telefone FROM colabs JOIN fornecedor WHERE idColab = ?', [req.body.id], function(err, results, fields){
-        res.render('updateProvider', {data: results})        
+app.get('/updateProvider/:id', urlencodeParser, function(req, res){
+    sql.query('SELECT idColab, nome, cidade, bairro, email, cpf, telefone FROM colabs JOIN fornecedor WHERE idColab = ? AND colabFornecedorId = idColab', [req.params.id], function(err, results, fields){
+        res.render('updateProvider', {data: results})    
+        console.log(results)
+    })
+})
+
+
+app.post('/controllerUpdateProvider/:id', urlencodeParser, function(req, res){
+    sql.query('UPDATE colabs SET nome = ?, cidade = ?, email = ?, telefone = ?, bairro = ? WHERE idColab = ?', [req.body.name, req.body.city, req.body.email, req.body.phone, req.body.neighborhood, req.params.id], function(err, results, fields){
+        console.log('id: ', req.params.id)
+        sql.query('UPDATE fornecedor SET cpf = ? WHERE colabFornecedorId = ?', [req.body.cpf, req.params.id], function(err, results, fields){
+            res.render('controllerUpdateProvider') 
+        })
     })
 })
 
