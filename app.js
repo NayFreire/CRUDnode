@@ -37,7 +37,7 @@ app.post('/menu', urlencodeParser, function(req, res){
     })
 })
 
-//--------------------------------------- Routes Employee ----------------------------------------
+//-------------------------------------- Routes Employee ---------------------------------------
 
 app.get('/addEmployee', function(req, res){
     res.render('addEmployee')
@@ -47,7 +47,7 @@ app.post('/controllerEmp', urlencodeParser, function(req, res){
     res.render('controllerEmp', {username: req.body.username})
 })
 
-//---------------------------------------- Routes Provider ----------------------------------------
+//--------------------------------------- Routes Provider --------------------------------------
 var colabIdForProvider;
 var provId;
 var provNome;
@@ -108,7 +108,7 @@ app.get('/deleteProvider/:id', function(req, res){
     res.render('deleteProvider')
 })
 
-//---------------------------------------- Routes Client ----------------------------------------
+//--------------------------------------- Routes Client ----------------------------------------
 var colabIdForClient;
 
 app.get('/addClient', function(req, res){
@@ -176,8 +176,13 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
             }
             else if(req.body.option == 'nao'){
                 var none = 0;
-                sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
-                res.render('controllerAddProduct')
+                if(req.body.qtdProduto > 0){
+                    res.send('Você declarou que não há produtos no estoque')
+                }
+                else{
+                    sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
+                    res.render('controllerAddProduct')
+                }
             }
         }
     })    
@@ -211,7 +216,7 @@ app.get('/deleteProduct/:id', function(req, res){
     sql.query('DELETE FROM produto WHERE idProduto = ?', [req.params.id])
     res.render('deleteProduct')
 })
-//-------------------------------- Routes Provider-Product Relation --------------------------------
+//------------------------------ Routes Provider-Product Relation ------------------------------
 var providerId = provId;
 var nomeProvider;
 app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){

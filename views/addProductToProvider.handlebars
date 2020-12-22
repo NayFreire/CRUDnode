@@ -1,21 +1,33 @@
-<h1>Relacionando Produtos à Fornecedores</h1>
-<hr>
-<h2>Nesta seção, vamos ligar o (a) fornecedor(a) {{nome}} com o id {{idP}} à determinado produto, assumindo que o mesmo fornece tal protudo</h2>
+<div class="container-fluid h-100">
+    <div class="row">
+        <span class="col-lg-1"></span>
+        <div class="col-lg-10">
+            <h1>Relacionando Produtos à Fornecedores</h1>
+            <hr>
+            <h2>Nesta seção, vamos ligar o (a) fornecedor(a) {{nome}} com o id {{idP}} à determinado produto, assumindo que o mesmo fornece tal protudo</h2>
 
-<table>
-    <tr>
-        <td>Nome</td>
-        <td>Associar</td>
-    </tr>
+            <table>
+                <tr>
+                    <td>Nome</td>
+                    <td>Associar</td>
+                    <td>Estoque</td>
+                    <td>Ação</td>
+                </tr>
 
-    {{#data}}
-        <tr>
-            <td>{{nome}}</td>
-            <td>
-                <a href="/confirmAssociation/{{idProduto}}" title="Ligar esse produto ao fornecesor">
-                    <img class="imgIcon" src="/img/addAssociation.png" alt="Associar">
-                </a>
-            </td>
-        </tr>
-    {{/data}}
-</table>
+                {{#data}}
+                    <tr>
+                        <td>{{nome}}</td>
+                        <td>{{tipo}}</td>
+                        <td>{{qtdEstoque}}</td>
+                        <td>
+                            <a href="/confirmAssociation/{{idProduto}}" title="Ligar esse produto ao fornecesor">
+                                <img class="imgIcon" src="/img/addAssociation.png" alt="Associar">
+                            </a>
+                        </td>
+                    </tr>
+                {{/data}}
+            </table>
+        </div>
+        <span class="col-lg-1"></span>
+    </div>
+</div>
