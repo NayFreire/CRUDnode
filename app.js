@@ -135,6 +135,18 @@ app.get('/listClients/:id?', function(req, res){
         })
     }
 })
+app.get('/updateClient/:id', function(req, res){
+    sql.query('SELECT idColab, nome, cidade, bairro, email, telefone, cnpj FROM colabs JOIN cliente WHERE idColab = ? AND colabClienteId = idColab', [req.params.id], function(err, results, fields){
+        res.render('updateClient', {data: results})
+    })
+})
+app.post('/controllerUpdateClient/:id', urlencodeParser, function(req, res){
+    sql.query('UPDATE colabs SET nome = ?, cidade = ?, email = ?, telefone = ?, bairro = ? WHERE idColab = ?', [req.body.name, req.body.city, req.body.email, req.body.phone, req.body.neighborhood, req.params.id])
+    sql.query('UPDATE cliente SET cnpj = ? WHERE colabClienteId = ?', [req.body.cnpj, req.params.id])
+    res.render('controllerUpdateClient')
+    console.log('name: ', req.body.name)
+})
+
 app.get('/controllerDeleteColabs/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     sql.query('DELETE FROM cliente WHERE colabClienteId = ?', [req.params.id])
@@ -183,6 +195,8 @@ app.get('/listProducts/:id?', function(req, res){
         })
     }
 })
+
+// app.get()
 
 //-------------------------------- Routes Provider-Product Relation --------------------------------
 var providerId = provId;
