@@ -207,6 +207,10 @@ app.post('/controllerUpdateProduct/:id', urlencodeParser, function(req, res){
     res.render('controllerUpdateProduct')
 })
 
+app.get('deleteProduct/:id', function(req, res){
+    sql.query('DELETE FROM produto WHERE idProduto = ?', [req.params.id])
+    res.render('deleteProduct')
+})
 //-------------------------------- Routes Provider-Product Relation --------------------------------
 var providerId = provId;
 var nomeProvider;
