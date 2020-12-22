@@ -7,6 +7,7 @@ const app = express()
 
 const urlencodeParser = bodyParser.urlencoded({extended: false});
 
+//Database connection
 const sql = mysql.createConnection({host: 'localhost',
                                     user: 'root',
                                     password: '',
@@ -26,19 +27,22 @@ var username, passw;
 app.get('/', function(req, res){
     res.render('index')
 })
+
+//Login
 app.post('/menu', urlencodeParser, function(req, res){ 
     sql.query('SELECT username, senha FROM funcionarios WHERE username = ? AND senha = ?', [req.body.nomeFunc, req.body.senhaFunc], function(err, results, fields){
         if(results.length>0){
             res.render('menu')
         }
         else{
-            res.send('O nome de usuário e/ou a senha estão incorretos')
+            res.send('<h1>O nome de usuário e/ou a senha estão incorretos</h1>')
         }
     })
 })
 
 //-------------------------------------- Routes Employee ---------------------------------------
 
+//Add Employee
 app.get('/addEmployee', function(req, res){
     res.render('addEmployee')
 })
@@ -52,6 +56,7 @@ var colabIdForProvider;
 var provId;
 var provNome;
 
+//Add Provider
 app.get('/addProvider', function(req, res){
     res.render('addProvider')
 })
@@ -63,6 +68,8 @@ app.post('/controllerAdd', urlencodeParser, function(req, res){
     })
     res.render('controllerAdd', {name: req.body.name})
 })
+
+//List Providers
 app.get('/listProviders/:id?', function(req, res){
     if(!req.params.id){
         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cpf FROM colabs INNER JOIN fornecedor WHERE idColab = colabFornecedorId ORDER BY idColab ASC', function(err, results, fields){
@@ -75,6 +82,8 @@ app.get('/listProviders/:id?', function(req, res){
         })
     }
 })
+
+//Provider-Product Association
 app.get('/addProductToProvider/:id', function(req, res){
     provId = req.params.id;
     sql.query('SELECT * FROM produto', function(err, result, fields){
@@ -85,13 +94,14 @@ app.get('/addProductToProvider/:id', function(req, res){
     })
     console.log(provId)
 })
+
+//Update Provider
 app.get('/updateProvider/:id', urlencodeParser, function(req, res){
     sql.query('SELECT idColab, nome, cidade, bairro, email, cpf, telefone FROM colabs JOIN fornecedor WHERE idColab = ? AND colabFornecedorId = idColab', [req.params.id], function(err, results, fields){
         res.render('updateProvider', {data: results})    
         console.log(results)
     })
 })
-
 
 app.post('/controllerUpdateProvider/:id', urlencodeParser, function(req, res){
     sql.query('UPDATE colabs SET nome = ?, cidade = ?, email = ?, telefone = ?, bairro = ? WHERE idColab = ?', [req.body.name, req.body.city, req.body.email, req.body.phone, req.body.neighborhood, req.params.id], function(err, results, fields){
@@ -102,6 +112,7 @@ app.post('/controllerUpdateProvider/:id', urlencodeParser, function(req, res){
     })
 })
 
+//Delete Provider
 app.get('/deleteProvider/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     sql.query('DELETE FROM fornecedor WHERE colabFornecedorId = ?', [req.params.id])
@@ -111,6 +122,7 @@ app.get('/deleteProvider/:id', function(req, res){
 //--------------------------------------- Routes Client ----------------------------------------
 var colabIdForClient;
 
+//Add Client
 app.get('/addClient', function(req, res){
     res.render('addClient')
 })
@@ -123,6 +135,8 @@ app.post('/controllerAddCliente', urlencodeParser, function(req, res){
     })
     res.render('controllerAddClient', {name: req.body.name})
 })
+
+//List Client
 app.get('/listClients/:id?', function(req, res){
     if(!req.params.id){
         sql.query('SELECT DISTINCT idColab, nome, cidade, bairro, email, telefone, cnpj FROM colabs JOIN cliente WHERE idColab = colabClienteId ORDER BY idColab ASC', function(err, results, fields){
@@ -135,6 +149,8 @@ app.get('/listClients/:id?', function(req, res){
         })
     }
 })
+
+//Update Client
 app.get('/updateClient/:id', function(req, res){
     sql.query('SELECT idColab, nome, cidade, bairro, email, telefone, cnpj FROM colabs JOIN cliente WHERE idColab = ? AND colabClienteId = idColab', [req.params.id], function(err, results, fields){
         res.render('updateClient', {data: results})
@@ -147,6 +163,7 @@ app.post('/controllerUpdateClient/:id', urlencodeParser, function(req, res){
     console.log('name: ', req.body.name)
 })
 
+//Delete CLient
 app.get('/controllerDeleteColabs/:id', function(req, res){
     sql.query('DELETE FROM colabs WHERE idColab = ?', [req.params.id])
     sql.query('DELETE FROM cliente WHERE colabClienteId = ?', [req.params.id])
@@ -154,6 +171,7 @@ app.get('/controllerDeleteColabs/:id', function(req, res){
 })
 
 //--------------------------------------- Routes Product ---------------------------------------
+//Add Product
 app.get('/addProduct', function(req, res){
     res.render('addProduct')
 })
@@ -162,12 +180,12 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
     sql.query('SELECT * FROM produto WHERE nome = ? AND tipo = ?', [req.body.nameProduto, req.body.typeProduto], function(err, results, fields){
         console.log(results)
         if(results.length>0){
-            res.send('Este produto já foi cadastrado')
+            res.send('<h1 style: text-align: center;>Este produto já foi cadastrado</h1>')
         }
         else{
             if(req.body.option == 'sim'){
                 if(req.body.qtdProduto == 0){
-                    res.send('Você não indicou uma quantidade do produtos válida')
+                    res.send('<h1 style: text-align: center;>Você não indicou uma quantidade do produtos válida</h1>')
                 }
                 else{
                     sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, req.body.qtdProduto])
@@ -177,7 +195,7 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
             else if(req.body.option == 'nao'){
                 var none = 0;
                 if(req.body.qtdProduto > 0){
-                    res.send('Você declarou que não há produtos no estoque')
+                    res.send('<h1 style: text-align: center;>Você declarou que não há produtos no estoque e ainda assim colocou um número maior que zero</h1>')
                 }
                 else{
                     sql.query('INSERT INTO produto (nome, tipo, qtdEstoque) VALUES (?,?,?)', [req.body.nameProduto, req.body.typeProduto, none])
@@ -188,6 +206,7 @@ app.post('/controllerAddProduct', urlencodeParser, function(req, res){
     })    
 })
 
+//List Product
 app.get('/listProducts/:id?', function(req, res){
     if(!req.params.id){
         sql.query('SELECT * FROM produto', function(err, results, fields){
@@ -201,6 +220,7 @@ app.get('/listProducts/:id?', function(req, res){
     }
 })
 
+//Update Product
 app.get('/updateProduct/:id', function(req, res){
     sql.query('SELECT * FROM produto WHERE idProduto = ?', [req.params.id], function(err, results, fields){
         res.render('updateProduct', {data: results})
@@ -212,6 +232,7 @@ app.post('/controllerUpdateProduct/:id', urlencodeParser, function(req, res){
     res.render('controllerUpdateProduct')
 })
 
+//Delete Product
 app.get('/deleteProduct/:id', function(req, res){
     sql.query('DELETE FROM produto WHERE idProduto = ?', [req.params.id])
     res.render('deleteProduct')
@@ -219,11 +240,13 @@ app.get('/deleteProduct/:id', function(req, res){
 //------------------------------ Routes Provider-Product Relation ------------------------------
 var providerId = provId;
 var nomeProvider;
+
+//Add Provider-Product Association
 app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){
 
     sql.query('INSERT INTO fornecedor_tem_produto VALUES (?,?)', [provId, req.params.id], function(err, results, fields){
         if(err.errno==1062){ //Se o erro que retornar tem número 1062, então esses items já foram cadastrados juntos
-            res.send('Esse produto já foi associado à esse fornecedor')
+            res.send('<h1 style: text-align: center;>Esse produto já foi associado à esse fornecedor</h1>')
         }
         else{            
             res.render('confirmAssociation')
