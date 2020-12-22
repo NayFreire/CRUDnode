@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <h1>Cadastre de Clientes</h1>
+    <div class="row">
+        <span class="col-md-4"></span>
+        <div class="col-md-4">
+            {{#data}}
+                <form action="/controllerUpdateProduct/{{idProduto}}" method="post" name="form1">
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="name">Nome do Produto</label>
+                        <input type="text" class="form-control" id="name" name="nameProduto" placeholder="Ex.: Banana" value="{{nome}}" required>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="typeProduto">Tipo do Protudo</label>
+                        <input type="text" class="form-control" id="type" name="typeProduto" placeholder="Prata, Nanica, etc" value="{{tipo}}" required>
+                    </div>
+                    <label for="">Já temos este produto?</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="sim" name="option" value="sim">
+                        <label class="form-check-label" for="exampleRadios1">
+                            Sim
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" id="nao" name="option" value="nao" checked>
+                        <label class="form-check-label" for="exampleRadios2">
+                            Não
+                        </label>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <label for="qtdProduto">Quantidade do produto</label>
+                        <input type="number" class="form-control" id="type" name="qtdProduto"  min="0" value="{{qtdEstoque}}" required>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-center">
+                        <button type="submit" class="btn btn-primary">Editar</button>
+                    </div>
+                </form>
+            {{/data}}
+        </div>
+        <span class="col-md-4"></span>
+    </div>
+</div>

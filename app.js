@@ -153,7 +153,7 @@ app.get('/controllerDeleteColabs/:id', function(req, res){
     res.render('controllerDeleteColabs')   
 })
 
-//----------------------------------------- Routes Product -----------------------------------------
+//--------------------------------------- Routes Product ---------------------------------------
 app.get('/addProduct', function(req, res){
     res.render('addProduct')
 })
@@ -196,7 +196,16 @@ app.get('/listProducts/:id?', function(req, res){
     }
 })
 
-// app.get()
+app.get('/updateProduct/:id', function(req, res){
+    sql.query('SELECT * FROM produto WHERE idProduto = ?', [req.params.id], function(err, results, fields){
+        res.render('updateProduct', {data: results})
+    })
+})
+
+app.post('/controllerUpdateProduct/:id', urlencodeParser, function(req, res){
+    sql.query('UPDATE produto SET nome = ?, tipo = ?, qtdEstoque = ? WHERE idProduto = ?', [req.body.nameProduto, req.body.typeProduto, req.body.qtdProduto, req.params.id])
+    res.render('controllerUpdateProduct')
+})
 
 //-------------------------------- Routes Provider-Product Relation --------------------------------
 var providerId = provId;
