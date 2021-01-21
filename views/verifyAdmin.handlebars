@@ -21,14 +21,14 @@
             <a href="addEmployee">Cadastrar de funcionários</a>
         </div> --}}
     {{!-- </div> --}}
-    <form class="form-signin" action="/menu" method="post" name="form1">
+    <form class="form-signin" action="/verifyAdmLogin" method="post" name="form1">
         <div class="d-flex align-items-center justify-content-center w-100">
             <img class="mb-4" src="/img/userIcon.png" alt="" width="72" height="72">
         </div>
 
-        <h1 class="h3 mb-3 font-weight-normal">Faça login aqui</h1>
-
-        {{#if menssage}}
+        <h1 class="h3 mb-3 font-weight-normal">Verificação de administrador</h1>
+        
+        {{#if message}}
             {{message}}
         {{/if}}
 
@@ -40,9 +40,6 @@
             <button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
         </div>
         <br>
-        <div class="d-flex aling-items-center justify-content-center newRegisterBtn">
-            <a href="/verifyAdmin" style="text-align: center;">Novo aqui? Faça o cadastro</a>
-        </div>
         {{!-- <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button> --}}
     </form>
         </div>

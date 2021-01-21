@@ -30,15 +30,26 @@ app.get('/', function(req, res){
 })
 
 //Login
-app.post('/menu', urlencodeParser, function(req, res){ 
-    sql.query('SELECT username, senha FROM funcionarios WHERE username = ? AND senha = ?', [req.body.nomeFunc, req.body.senhaFunc], function(err, results, fields){
-        if(results.length>0){
-            res.render('menu')
-        }
-        else{
-            res.send('<h1>O nome de usuário e/ou a senha estão incorretos</h1>')
-        }
-    })
+app.post('/menu', urlencodeParser, async function(req, res){
+    
+    // if(!req.body.nomeFunc || !req.body.senhaFunc){
+    //     res.render('menu')
+    // }
+    // else{
+        let hashedPassw = await bcrypt.hash(req.body.senhaFunc, 8)
+
+        sql.query('SELECT * FROM funcionarios WHERE username = ?', [req.body.nomeFunc], async function(err, results, fields){            
+            console.log('hashed: ' + hashedPassw)
+            console.log(results)
+            if(await bcrypt.compare(req.body.senhaFunc, results[0].senha)){
+                res.render('menu')
+            }
+            else{
+                res.send('<h1>O nome de usuário e/ou a senha estão incorretos</h1>')
+            }
+        })
+    // }
+    
 })
 
 //-------------------------------------- Routes Employee ---------------------------------------
@@ -47,16 +58,45 @@ app.post('/menu', urlencodeParser, function(req, res){
 app.get('/addEmployee', function(req, res){
     res.render('addEmployee')
 })
-app.post('/controllerEmp', urlencodeParser, function(req, res){
+app.post('/controllerEmp', urlencodeParser, async function(req, res){
 
-    sql.query('INSERT INTO funcionarios (username, senha, status) VALUES (?, ?, ?)', [req.body.username, req.body.passw, req.body.employeeType])
-    res.render('controllerEmp', {username: req.body.username})
+    let hashedPassword = await bcrypt.hash(req.body.passw, 8); //hash(o que eu quero encriptar, quantas vezes eu quero encriptar)
+
+    sql.query('INSERT INTO funcionarios (username, senha, status) VALUES (?, ?, ?)', [req.body.username, hashedPassword, req.body.employeeType])
+    res.render('index')
+})
+
+app.get('/verifyAdmin', urlencodeParser, function(req, res){
+    //Caso não haja ninguém cadastrado no sistema, o usuário será redirecionado para a página de registro de funcionários
+    sql.query('SELECT * FROM funcionarios WHERE status LIKE "admin"', function(err, results, fields){
+        if(results){
+            res.render('verifyAdmin')
+        }
+        else{
+            res.render('addEmployee')
+        }
+    })
+
+})
+
+app.post('/verifyAdmLogin', urlencodeParser, function(req, res){
+    let hash = bcrypt.hash(req.body.senhaFunc)
+
+    sql.query('SELECT * FROM funcionarios WHERE username = ? AND status LIKE "admin"', [req.body.nomeFunc], async function(err, results, fields){
+
+        if(await bcrypt.compare(req.body.senhaFunc, results[0].senha)){
+            res.render('addEmployee')
+        }
+        else{
+            res.render('verifyAdmin', {message: 'Login ou senha incorreto'})
+        }
+    })
 })
 
 app.get('/verifyRegistration', function(req, res){
     sql.query('SELECT * FROM funcionarios WHERE status LIKE "admin"', function(err, results, fields){
         if(results){
-            res.render('index', {menssage: 'Precisa da verificação do administrador'})
+            res.render('verifyAdmin', {message: 'É preciso ser um administrador para cadastrar um novo funcionário. Insira o login e a senha do mesmo para continuar'})
         }
         else{
             res.render('addEmployee')
