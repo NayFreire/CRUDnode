@@ -253,3 +253,13 @@ select{
     color: #000;
     transition: ease-in-out .5s;
 }
+
+.newRegisterBtn a{
+    text-decoration: none;
+    color: #000 !important;
+    font-size: 14pt !important;
+}
+
+.newRegisterBtn a:hover{
+    color: #0780e2 !important;
+}

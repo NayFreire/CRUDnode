@@ -53,6 +53,17 @@ app.post('/controllerEmp', urlencodeParser, function(req, res){
     res.render('controllerEmp', {username: req.body.username})
 })
 
+app.get('/verifyRegistration', function(req, res){
+    sql.query('SELECT * FROM funcionarios WHERE status LIKE "admin"', function(err, results, fields){
+        if(results){
+            res.render('index', {menssage: 'Precisa da verificação do administrador'})
+        }
+        else{
+            res.render('addEmployee')
+        }
+    })
+})
+
 //--------------------------------------- Routes Provider --------------------------------------
 var colabIdForProvider;
 var provId;
