@@ -6,7 +6,9 @@
         <div class="col-md-4">
             {{#data}}
             <form action="/controllerUpdateProvider/{{idColab}}" method="post" name="form1">
-                
+                {{#if message}}
+                    {{message}}
+                {{/if}}
                     <div class="form-group" style="margin-bottom: 10px;">
                     <label for="name">Nome Completo</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{nome}}" required>
