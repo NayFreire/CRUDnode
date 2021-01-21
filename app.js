@@ -2,6 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const mysql = require('mysql')
 const handlebars = require('express-handlebars')
+const bcrypt = require('bcryptjs')
 
 const app = express()
 
@@ -47,6 +48,7 @@ app.get('/addEmployee', function(req, res){
     res.render('addEmployee')
 })
 app.post('/controllerEmp', urlencodeParser, function(req, res){
+
     sql.query('INSERT INTO funcionarios (username, senha, status) VALUES (?, ?, ?)', [req.body.username, req.body.passw, req.body.employeeType])
     res.render('controllerEmp', {username: req.body.username})
 })
