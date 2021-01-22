@@ -298,12 +298,12 @@ var nomeProvider;
 app.get('/confirmAssociation/:id', urlencodeParser, function(req, res){
 
     sql.query('INSERT INTO fornecedor_tem_produto VALUES (?,?)', [provId, req.params.id], function(err, results, fields){
-        if(err.errno==1062){ //Se o erro que retornar tem número 1062, então esses items já foram cadastrados juntos
+        if(err){ //Se o erro que retornar tem número 1062, então esses items já foram cadastrados juntos
             res.send('<h1 style: text-align: center;>Esse produto já foi associado à esse fornecedor</h1>')
         }
         else{            
             res.render('confirmAssociation')
-        }        
+        }     
     })
 })
 
